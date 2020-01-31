@@ -1,0 +1,71 @@
+#!/bin/sh
+
+# udhcpc script edited by Tim Riker <Tim@Rikers.org>
+
+[ -z "$1" ] && echo "Error: should be called from udhcpc" && exit 1
+x=0
+RESOLV_CONF="/etc/resolv.conf"
+[ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
+[ -n "$subnet" ] && NETMASK="netmask $subnet"
+
+case "$1" in
+	deconfig)
+		/sbin/ifconfig $interface 0.0.0.0
+		;;
+
+	renew|bound)
+		/sbin/ifconfig $interface $ip $BROADCAST $NETMASK
+
+		if [ -n "$router" ] ; then
+			echo "Deleting routers"
+			while route del default gw 0.0.0.0 dev $interface 2>/dev/null ; do
+				:
+			done
+
+			for i in $router ; do
+				route add default gw $i dev $interface
+			done
+		fi
+
+		if [ "$interface" = "eth0" ] ; then
+			echo options timeout:3 > $RESOLV_CONF
+			echo -n > /tmp/dns_eth1
+			for i in $dns ; do
+				echo nameserver $i >> $RESOLV_CONF
+				echo $i >> /tmp/dns_eth1
+			done
+			if [ -e /tmp/dns_tmp ]; then
+				filename='/tmp/dns_tmp'
+				exec < $filename
+				while read line
+				do
+					echo nameserver $line >> $RESOLV_CONF
+				done
+			fi
+		elif [ "$interface" != "eth1" ]; then
+			echo options timeout:3 > $RESOLV_CONF
+			if [ -e /tmp/dns_eth1 ]; then
+				filename='/tmp/dns_eth1'
+				exec < $filename
+				while read line
+				do
+				        echo nameserver $line >> $RESOLV_CONF
+				done
+			fi
+			echo -n > /tmp/dns_tmp
+			for i in $dns ; do
+				if [ $x -eq 0 ] && [ -e /tmp/dns_eth1 ]; then
+					filename='/tmp/dns_eth1'
+					firstline=$(head -1 $filename)
+					sed -i "/${firstline}/ a nameserver $i" $RESOLV_CONF
+					let x=x+1
+				else
+					echo nameserver $i >> $RESOLV_CONF
+				fi
+				echo $i >> /tmp/dns_tmp
+			done
+		fi
+		;;
+esac
+
+exit 0

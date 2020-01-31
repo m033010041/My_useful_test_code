@@ -1,0 +1,12 @@
+Open device /dev/hidraw0 done.
+Controller Info:
+	Type Name:		PCAP3189UR Series
+		Model Name:		Sirius_2511
+			FW Version:		00_T8
+				Parameter Version:	00.00.00
+
+				File: read - SensorTestDefault.ini
+				Read Parameter done.
+				Start testing:
+
+

@@ -1,0 +1,41 @@
+
+*************************************************************************
+* 	PG8168 -  EEPROM/EFUSE Programming Utility for		        *
+*	  	  Realtek RTL8168 Family Ethernet Controller            *
+* 	Version : 2.48.0.11  					        *
+* Copyright (C) Realtek Semiconductor Corp. 2014. All Rights Reserved.  *
+*************************************************************************
+
+ This is RTL8168FB
+ Use EFuse
+ Start to Dump and Parse EFuse Content
+ 1B 00 00 0C 26 18 19 04 10 AE 50 2C EC 10 50 2E
+ 23 01 18 51 00 18 52 CF 18 53 3C 18 54 60 18 55
+ 54 18 56 02 50 42 C3 FF 40 30 00 18 F0 3F 71 64
+ 00 E0 4C 68 71 68 00 00 00 01 19 18 87 08 40 18
+ 04 19 4C 30 02 FF FF FF FF FF FF FF FF FF FF FF
+ FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+ FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+ FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+ FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+ FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+ FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+ FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FE
+ NODEID = 00 0C 26 18 10 AE
+ SVID = 10 EC
+ SMID = 01 23
+ CONFIG0 = 00
+ CONFIG1 = CF
+ CONFIG2 = 3C
+ CONFIG3 = 60
+ CONFIG4 = 54
+ CONFIG5 = 02
+ PMC = C3 FF
+ ROMBAR = 00
+ ROMCONF = 3F
+ SN = 00 E0 4C 68 00 00 00 01
+ LEDCFG = 08 87
+ PREFETCHABLE = Disable (04)
+ Efuse Write Count = 1 
+ PG Version (EFUSE) = V2.48 
+ EFuse Remain 119 Bytes!!!
